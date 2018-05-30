@@ -81,8 +81,8 @@ export default Service.extend({
     let stripeConfig = getWithDefault(this, 'stripeConfig', {});
     let options = copy(stripeConfig);
     // Support for Ember <= 2.4 (when assign was introduced)
-    let assign = assign || merge;
-    assign(options, this._componentStripeConfig(component));
+    let assignObjs = assign || merge;
+    assignObjs(options, this._componentStripeConfig(component));
 
     return this._cleanupOptions(options);
   },
