@@ -1,6 +1,9 @@
-# Stripe checkout for Ember [![Build Status](https://travis-ci.org/sweettooth/ember-cli-stripe.svg?branch=master)](http://travis-ci.org/sweettooth/ember-cli-stripe)
+# Stripe checkout for Ember
+==============================================================================
 
-![Preview](https://www.sweettoothrewards.com/wp-content/uploads/stripe-checkout.png)
+[![Build Status](https://travis-ci.org/smile-io/ember-cli-stripe.svg?branch=master)](https://travis-ci.org/smile-io/ember-cli-stripe)
+
+![Preview](https://user-images.githubusercontent.com/160955/40740195-d7890686-6450-11e8-9da2-d93ec38c78d6.png)
 
 ## Description
 
@@ -11,13 +14,15 @@ See [Stripe Checkout](https://stripe.com/docs/checkout#integration-custom) docs.
 
 The best documentation is the sample application in `tests/dummy`.
 
-## Installation
+Installation
+------------------------------------------------------------------------------
 
 ```sh
 ember install ember-cli-stripe 
 ```
 
-## Usage
+Usage
+------------------------------------------------------------------------------
 
 ```handlebars
 {{stripe-checkout
@@ -29,7 +34,7 @@ ember install ember-cli-stripe
 }}
 ```
 
-## Component properties
+### Component properties
 
 Property              | Purpose
 --------------------- | -------------
@@ -40,7 +45,7 @@ Property              | Purpose
 Besides the above, all [Stripe Checkout configuration options](https://stripe.com/docs/checkout#integration-custom) 
 are supported. If you notice anything missing please open an issue.
 
-### Actions
+#### Actions
 
 The primary action of this component, `onToken` is called when the Stripe checkout succeeds. Its main param is a [Stripe Token](https://stripe.com/docs/api#tokens) object.
 
@@ -69,7 +74,7 @@ Action                | Purpose
 `onClosed`            | The callback invoked when Checkout is closed.
 
 
-## Configuration
+### Configuration
 All Stripe Checkout configuration options can be set in your apps config.
 
 In most cases, you will want to add at least your Stripe **publishable key** to your app's config, but this can be set as a property on the component too. 
@@ -93,7 +98,7 @@ module.exports = function(environment) {
 Multiple Stripe keys are supported, when passed directly to the component.
 
 
-## Compatibility
+### Compatibility
 
 This addon is tested against Ember 1.13+.
 
@@ -101,25 +106,34 @@ For older versions of Ember, use version `0.4.0` and check the [old docs](https:
 
 **Note:** At your own risk, feel free to try current version, it might still work.
 
+Contributing
+------------------------------------------------------------------------------
 
-## Contributing
+### Installation
 
-PRs welcome!
-
-* `git clone` this repository
+* `git clone <repository-url>`
+* `cd my-addon`
 * `npm install`
-* `bower install`
 
-### Running
+### Linting
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+* `npm run lint:js`
+* `npm run lint:js -- --fix`
 
-### Running Tests
+### Running tests
 
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+* `ember test` – Runs the test suite on the current Ember version
+* `ember test --server` – Runs the test suite in "watch mode"
+* `ember try:each` – Runs the test suite against multiple Ember versions
 
+### Running the dummy application
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+* `ember serve`
+* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
+
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+
+License
+------------------------------------------------------------------------------
+
+This project is licensed under the [MIT License](LICENSE.md).
