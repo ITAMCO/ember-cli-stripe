@@ -1,4 +1,4 @@
-# Stripe checkout for Ember
+Stripe checkout for Ember
 ==============================================================================
 
 [![Build Status](https://travis-ci.org/smile-io/ember-cli-stripe.svg?branch=master)](https://travis-ci.org/smile-io/ember-cli-stripe)
