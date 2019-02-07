@@ -104,10 +104,27 @@ export default Service.extend({
       throw new Error('[ember-cli-stripe] Missing required `key` param');
     }
 
-    let handler = StripeCheckout.configure({
+    if(component.hasOwnProperty('onSource') && component.hasOwnProperty('onToken')){
+      throw new Error('[ember-cli-stripe] Only one of "onToken" or "onSource" may be specified');
+    }
+
+    let cfg = {
       key: stripeConfig.key,
       token() {
         invokeAction(component, 'onToken', ...arguments);
+
+        // Add deprecation for previous `action` callback
+        if (!isBlank(component.attrs.action)) {
+          deprecate('Using `action` callback is deprecated and will be removed in future versions. Please use `onToken` with a closure action instead',
+            false,
+            { id: 'ember-cli-stripe.action-callback', until: '1.1.0' }
+          );
+
+          invokeAction(component, 'action', ...arguments);
+        }
+      },
+      source() {
+        invokeAction(component, 'onSource', ...arguments);
 
         // Add deprecation for previous `action` callback
         if (!isBlank(component.attrs.action)) {
@@ -125,7 +142,21 @@ export default Service.extend({
       closed() {
         invokeAction(component, 'onClosed');
       }
-    });
+    };
+
+    // This seems an odd way of doing it, but I'm not familiar with the syntax by which token was defined previously
+    // (and above), and defining them outside the objects (e.g. cfg['token'] = ()=>{};) seems to cause the args to
+    // be a class, rather than the expected token or source
+
+    if(component.hasOwnProperty('onSource')){
+      delete cfg['token'];
+    }
+
+    if(component.hasOwnProperty('onToken')){
+      delete cfg['source'];
+    }
+
+    let handler = StripeCheckout.configure(cfg);
 
     this._alive[componentGuid]['handler'] = handler;
 
